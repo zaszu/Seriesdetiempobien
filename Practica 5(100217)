@@ -1,0 +1,61 @@
+##X/II/XVII
+######################################################################################
+## 1 Buscamos INEGI
+## 2 Bajamos la ST
+## 3 Ubicar la ruta de ka ST en la computadora
+## 4 Importamos en R el archivo csv
+## 5 Reconocer el archivo como St
+
+##Generar 4 objetos con datos aleatorios y que tengan 60 datos 
+## objeo 1 de numero de profesionista (mill) rango a 5 a 8
+##objeto 2 crec pib rango de 0 a 5
+## objeto 3 porcentaje de ocupados de 40 a 60 
+##objeto 4 porcentaje de desocupados rango 3 a 8 
+require(foreign)
+prof <-sample(5:8,60,replace = TRUE )
+crec <-sample(0:5,60,replace = TRUE )
+por_ocu<-sample(40:60,60,replace = TRUE )
+por_desocu<-sample(3:8,60,replace = TRUE )
+
+## 1) una vez que generen los datos hacer un data frame
+## De los cuatro objetos
+pceu <- data.frame(prof,crec,por_ocu,por_desocu)##crear base con 4 objetos
+##Mostrar los  primerosy ultimos12 datos 
+pceu [1:12, ]## 1°entrada renglon. 2° columna
+pceu [49:60, ]
+## 3) convertir los objetos en series de tiempo 
+## desde el data frame comenzando en 2010 y
+##son datos mensuales 
+
+
+profts<-ts(prof,frequency = 12,start=(2010))##para que la reconozca como serie de tiempo 
+#ts<- (base,frecuencia=anual, empieza en año 2010)
+crects<-ts(crec,frequency = 12,start=(2010))
+por_ocuts(por_ocu,frequency = 12,start=(2010))
+por_desocuts<-ts(por_desocu,frequency = 12,start=(2010))
+
+
+
+##TODAS JUNTAS 
+pceuts<-ts(pceu,frequency = 12,start=(2010))
+end(pceuts)##Nos dice cuando termina mi base
+#start=2000   end=2014
+plot(pceuts)
+plot(aggregate(pceuts))
+
+##Solo algunas
+
+plot.ts(pceuts[,c(1,3)])## solo imprime las columanas 
+plot(aggregate(pceuts))
+
+
+## Bajar una serie de tiempo del Pib en mexico de 1980 a 2015
+##crear 4 Series de tiempo
+##1980 a 1990
+##1991 a 2000
+##2001 a 2010
+##2011 a 2015
+##graficar en una misma imagen la ST 2 y 3 
+setwd("C://Users//salaD-28//Desktop") #definir el directorio de raiz 
+require(foreign)
+pib <- data.frame(read.cvs("pib.cvs"))
