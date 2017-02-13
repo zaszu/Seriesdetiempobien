@@ -1,0 +1,13 @@
+############################################ 33 series de tiempo multiple####
+seriemultiple<-ts.intersect(desocuts,pobts,asets,inforts)## Serie de tiempomultiple
+## con las cuatro vriables 
+plot(seriemultiple, main="serie de tiempo multiple", xlab="años",ylab = "numero de persoas", col="green", type="overplotted", pch=2)
+
+## cortar serie de timepo, 1 serie de tiempo 2 donde inicia y donde termina
+
+seriemultiple02.07<-window(seriemultiple, start = c(2002, 1), end=c(2007,1)
+seriemultiple07.12<-window(seriemultiple, start = c(2007, 1), end=c(2011,12)   
+                           ##grafiaca
+plot(seriemultiple02.07, main="serie de tiempo multiple", xlab="años",ylab = "numero de persoas", col="green", type="overplotted", pch=2)
+plot(seriemultiple07.12, main="serie de tiempo multiple", xlab="años",ylab = "numero de persoas", col="green", type="overplotted", pch=2)       
+start(seriemultiple);end(seriemultiple)
