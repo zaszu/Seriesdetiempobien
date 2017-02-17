@@ -1,0 +1,42 @@
+### Para descomponer una serie de tiempo graficamente se utiliza 
+##una funcion que se llama decompose. por lo que primero 
+## es importante reconocer la serie de tiempo y despues 
+## graficamente
+
+desoc<- sample(3:8, 44, replace = T)
+tdesocu <- ts(desoc, frequency=4, start = 2005)
+plot(decompose(tdesocu))
+
+## lesly 
+require(foreign)
+pib<-read.csv(("/Users/jocelynflorencio/Desktop/TIIE2015.csv"))
+tpib <- ts(pib, frequency=4, start = 2007)
+plot(tpib)
+plot(decompose(tpib))
+
+
+##Gaby 
+require(foreign)
+pibMexico<-read.csv(("/Users/jocelynflorencio/Desktop/PIB México.csv"))
+pibMexicost <- ts(pibMexico, frequency=4, start = 2007)
+plot(pibMexicost)
+plot(decompose(pibMexicost))
+View(pibMexicost)
+summary(pibMexicost)
+
+depibMexicost <- decompose(pibMexicost)
+names (depibMexicost)
+depibMexicost$trend## imprime los datos que grafica
+depibMexicost$seasonal
+## 
+##Ejercicio descomponer una serie de tiempo 
+## 1) Graficamente y 2) mandar llamar cada uno de los componentes de la serie de tiempo
+##ealizar una interpretacion sobre los datos
+## observando de la serie de tiempo 
+##serie 1 = consumo de bienes y servicios de 
+## mx anuales [renglon 9:43, columna k]
+##serie 2= tasa de desocupacion, 2005,
+## trimestres 
+
+bienyser<-read.csv(("/Users/jocelynflorencio/Desktop/Libro6.csv"))
+bienyserst <- ts(bienyser,s, frequency=4])
