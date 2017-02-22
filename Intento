@@ -1,0 +1,29 @@
+require(foreign)
+base<-read.csv("C:\\Users\\Sala-D\\Downloads\\tarea2.csv")
+basest<-ts(base,frequency=4,start=2005)
+  basest
+
+sum(basest(c[1:4,1])
+y<-apply(basest,1,sum)
+y
+length(y)
+i<-1:4
+sum(y[i])
+
+
+
+
+for (d in  1:48){
+  
+  for (n in 1:4){
+a<-sum(y[d])
+
+}}
+print(a)
+
+for (d in 1:4){
+  d <- y[d] + y[(d+1)]
+  z = sum(d)
+  #w<-sum(y[d])
+}
+print(z)
