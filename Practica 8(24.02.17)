@@ -1,0 +1,102 @@
+require(foreign)
+
+base<-read.csv("C:\\Users\\Sala-D\\Desktop\\tarea2.csv")
+
+basest<-ts(base,frequency=4,start=2005)
+basest
+y<-apply(basest,1,sum)
+y
+length(y)
+ ############################for#####################
+u1<- (1:10)
+u2<-0
+for(i in 1:10){
+  u1[i] <- u1[i]+2
+  print(u1[i])
+}
+###########################Wille######################
+s<- 5
+while(s<6){s<-s*2; print(s); }
+s<- 1
+while(s<6){s<-s+1; ; if (s==4) breack; print(s); }
+while(s<6){s<-0+1; ; if (s==2) breack; print(s); }
+##corre todos los valores porque no encuentra el 2
+s<- 1
+while(s<3){s<-s+1; ; if (s==2) next; print(s); }
+#########Tendencia 
+detsdes<-decompose(basest)
+detsdes$trend
+detsdes$seasonal 
+plot(basest,col="blue",
+main="tasa de desocupacion trimestral",
+ylab="tasas",xlab="años")
+lines(detsdes$trend,col="red", ylab="tendencia")
+
+###otra manera
+#### desocupation <- read.csv(file.choose())
+##base<-read.csv("C:\\Users\\Sala-D\\Desktop\\tarea2.csv")
+##basest<-ts(base,frequency=4,start=2005)
+##descompose(basest)
+##vector<- 1:45
+## for(i in 1:45){
+##vector[i]<- (basest[i,1]+basest[i+1,1]+basest[i+2,1]+basest[i+3,1])/4
+##}
+########################################################################
+##length(vector)
+##vector
+
+##vector2<-1:44
+##for(i in 1:44){
+ ## vactor2[i]<-(vector[i]+vector[i+1])/2
+  
+##}
+
+##vector2
+
+##yt<-1:44
+##for(i in 1:44){
+##  yt[i]<-tsd[i+2,1]-vector2[i]
+##}
+#yt
+##length(yt)
+
+
+############################MODELO ADITIVO 
+##est <- matrix(1:48,nrow=4)
+##estk=1
+##i=1
+##k=1
+##for(c in 1:12){
+##for(f int 1:4)
+## if(k<=2|k>=47){ #|="o"
+##est[f,c]=0
+##}
+##else{
+ ## est[f,c]=yt[i]
+ ## i=i+1
+##}
+##k=k+1
+##}
+##}
+##est
+##v<-matrix(1:4,nrow=4)
+
+##v[1,1]<. vector(est[1,2:12])
+##v[2,1]<. vector(est[2,2:12])
+##v[3,1]<. vector(est[3,1:11])
+#v[4,1]<. vector(est[4,1:11])
+#tabla <- cbind(est,v)
+##View(tabla)
+#ivegloval<-mean(tabla[,13])
+##ivegloval
+##tabla2<-mean(est,v,est-vglogal)
+
+
+
+##################TAREA_####################
+##descomponer una serie con un modelo multiplicativo 
+##,type="multiplicativo"
+#encontrar una serie de tiempo con tendencia a la alza y
+### la estacionariedad tambien s eincrementa 
+####2 aplicar modelo multiplicativo y aditivo 
+####3 graficar tendencia
