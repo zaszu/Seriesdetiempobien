@@ -1,0 +1,81 @@
+#Practica 8
+#Descomposicion clásica
+#se utiliza la función decompose
+#otro tipo de descomposicion de la estacionariedad
+#Tendencia y estacionariedad es la descomposicion por Loess la cual esta basada 
+#en un lagoritmo que permite descomponer las st en tres elementos:
+#estacionariedad, tendencia, aleatoriedad.
+#una de las ventajas de esta descomposicion es el calculo de la estacionariedad que
+#se obtienen los valores de estacionariedad 
+#no constantesy te da una matriz completa, en constraste con el método
+#clásico de descomposicion
+#Descompocicion clasica
+##se utiliza decompose
+base<-read.csv("C:\\Users\\Sala-D\\Downloads\\tarea2.csv")
+basest<-ts(base,frequency=4,start=2005)
+desco<-decompose(basest)
+tend1<- desco$trend
+plot(tend1,col=05, main="tendencia desocupación",ylab="tasas",xlab="años")
+
+###descomposición tendecia, estacional por Loose
+#se utiliza la funcion stl()
+##solo lo puedes utilizar con bases univariadas
+
+###para que nuestra st sea uni variada
+basestu<-ts(base[1:48,1],frequency=4,start=2005)
+desco1<-stl(basestu, s.window="periodic",robust="T")
+names(desco1)
+desco1###esta es mi matriz
+desco$trend
+tend2<- desco1$time.series[,2]
+tend2
+##graficar tendencia clasica y LOOSe
+plot(tend1,col=14, main="tendencia desocupación",ylab="tasas",xlab="años")
+lines(tend2,col=04)
+###fiusha es la clasica y la azul por LOose
+##me suaviza los picos como se ve en año 2012
+
+###jalar la estacionariedad de la matriz(desco1)
+esta2<-desco1$time.series[,1]
+esta2
+install.packages("fpp")
+require(fpp)
+ajus<-seasadj(desco2)
+ajus
+###pronostico ingenuo
+##lo que hace es buscar una constante en base a todos tus valores
+#pronostica 20017,2018
+#miestras mas pronostico menos exactitud
+
+inge1<-naive(ajus)
+###naive(que quieres que te pronostique,x=4(que valor quieres que te pronostique))
+###es la que pronostica 
+plot(inge)
+
+
+#Base pib
+pib<-read.csv("C:\\Users\\Sala-D\\Downloads\\PIB.csv")
+pibst<-ts(pib,frequency=4,start=2007)
+pibst
+
+descopib<-decompose(pibst)
+tend1pib<- descopib$trend
+plot(tend1pib,col=05, main="pib",ylab="valor",xlab="años")
+
+###para que nuestra st sea uni variada
+pibu<-ts(pib[1:36,1],frequency=4,start=2007)
+desco1pib<-stl(pibu, s.window="periodic",robust="T")
+names(desco1pib)
+desco1pib###esta es mi matriz
+descopib$trend
+tend2pib<- desco1pib$time.series[,2]
+tend2pib
+##graficar tendencia clasica y LOOSe
+plot(tend1pib,col=14, main="PIB",ylab="valor",xlab="años")
+lines(tend2pib,col=04)
+###fiusha es la clasica y la azul por LOose
+##me suaviza los picos como se ve en año 2012
+
+###jalar la estacionariedad de la matriz(desco1)
+esta2pib<-desco1pib$time.series[,1]
+esta2pib
