@@ -1,0 +1,29 @@
+#pero impredecible a largo plazo con datos cilicos
+install.packages("fbb")
+require (fbb)
+plot(window(elec.start=1980), ylab="GWh", xlab = "year", main = "Australlia electricity production")
+     #ESTA TENDENCIA Y CICLICO 
+seasonplot ( elec.s=12, year,labels=F,
+             main="Electricidad",
+             ylab="año",col=rainbow(20), year, labels,left=TRUE, php=10)
+
+
+     plot(brcksq, ylab="million units", clab = "year",main="australian clay brick production")
+     #ESTA Y CICLO NO MUCHA TENDENCIA 
+    plot(hsales, main = "sales of new one family hoce", ylab ="total sales", xlab= "year")
+    ## hay muchos componentes ciclicos en esta grafica, tampoco hay un estacionariedad debido a que no hay
+    ##constantes.
+    ## Estacionariedad y ciclo no tendencia 
+    plot(hsales, main="sales of new one-family houses, USA", ylab="Total sales", xlab="year")
+    ##NO ESTACIONARIEDAD NI TENDENCIA POSIBLE SICLO 
+    seasonplot(hsales,s=12,year.labels=TRUE,
+               main="valor acciones ICA"
+               ylab="valor cierre", col=rainbow(20),year,labels.left=TRUE, php=15)
+    dec<- descompose (bricksq)
+    ##eliminando trendencia
+    sinesta <- bricksq - dec$seasonal
+    sintend <- bricksq- dec$trend
+    plot(sinesta)
+    plot(sintend)
+    install.packages("fpp")
+    require(fpp)
