@@ -1,0 +1,35 @@
+##aditivo se utiliza cuandi la magniud de las fluctuaciones estacionales dela serie de tiempo 
+## no varia al hacerlo la tendencia 
+
+################Multiplicativo
+#estos modelos son apropiados cuando la magnitud de las fluctuaciones estacionales de la serie crece y decrece proporcionalmenre con los crecimientos 
+## y decrementos 
+## de la tendencia. 
+### Ahora como vimos la clase pasada hay dos modelos que podemis descomponer las st
+## 1) modelo aditivo ------------- x t= mt+st+zt
+## 2) modelo multiplicativo---------xt= mt
+##### ahora para descomoner una st en un modelo multiplicativo 
+deso <- data.rame(read.csv("/home/Dowload/tarea2.csv"))
+desot<- ts(deso, recuency =4. start=2005)
+plot(desot)
+lines(eeadj, col="red")### graficar sin estacionariedad 
+dectsd<- descompose(desot)
+dectsdmu1<- descompose(desot,type="mult")
+### graficamos los dos modelos 
+plot(dectsd)
+plot(dectsd)
+### desestacionalizar una serie 
+### se destacionalizara para poder predecir nuestros datos
+## con mayor precicion y sin contar 
+### con factores externos al comporamient de nuestros datos 
+### dos elementos que permiten desestacionalizar una serie 
+
+require (fpp)
+eeadj <- seasand(dectsd)## desestacionalizar
+eeadj
+plot(eeadj)
+siniesta<- desot- dectsd$seasonal###otra forma; serie de tiempo menos mi componente estacional
+eeadj-sinesta## comprobando que es lo mismo las dos ormas de eliminar la estacionariedad
+##### elimina o matiza los picos de la grafica, si tus betas se incremnetan uertemente, al ocupar la estacionariedad elimina esos incrementoos
+## en R para que no se noten esos cambios importamtes 
+### para ver el comportamiento de tu grafica y que los picos no impacten en el pronostico
