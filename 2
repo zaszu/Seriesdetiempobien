@@ -1,0 +1,26 @@
+#Covarianza y Correlacion de un conjunto de datos.
+##Correlacion entre el peso y la estatura 
+p<-c(56,50,53,70,52,75,68,49)
+e<-c(160,150,158,170,174,180,149,145)
+funcion <-function (p,e){
+                             x<-(1:length(p))
+                             y<-(1:length(e))
+                             n<-length(e)
+                             pmedia<-mean(p)##Media
+                              emedia<-mean(e)
+for (i in 1:n)    
+                        {
+                                    x[i]<-p[i]-pmedia
+                                    y[i]<-e[i]-emedia  
+                         }
+  xy<-x*y  ##(xi-xmedia)
+  s<-sum(xy)##Suma de (xi-xmedia)
+  covarianza<-s/(n-1)
+  correlacion<-covarianza/(sd(p)*sd(e))
+  val<-c(covarianza,correlacion)
+  return(val)
+
+                            }
+funcion(p,e)
+cov(p,e)
+cor(p,e)
