@@ -1,0 +1,14 @@
+##TAREA 
+#Covarianza y Correlacion de un conjunto de datos.
+##Correlacion entre el peso y la estatura 
+p<-c(56,50,53,70,52,75,68,49)
+e<-c(160,150,158,170,174,180,149,145)
+##Covarianza
+n<- length(p)
+covarianza <-sum((p - mean(p))*(e - mean(e))) / (n - 1)
+View(covarianza)
+correlacion <- covarianza/(sd(p)*sd(e))
+
+funcion(p,e)
+cov(p,e)
+cor(p,e)
