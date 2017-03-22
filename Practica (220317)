@@ -1,0 +1,48 @@
+base<-read.csv("C:\\Users\\Sala-D\\Downloads\\pib anual.csv")
+desoc<-read.csv("C:\\Users\\Sala-D\\Downloads\\tarea2.csv")
+pibt<- ts(base)
+decocts<- ts(desoc)
+
+acf(pibt)
+acf(decocts)
+
+##Tarea busacr un serie de tiempo d emexico 
+##en donde con el correlograma determinen que tiene ruido clanco 
+##Otra serie de tiempo donde se muestre en el correlograma exponga que la serie de tiempo 
+##caminata aleatoria
+
+################MODELOS LINEAÑES PARA PRONOSTICAR
+
+
+############################NAIVE
+##son la aplicacion de pronosticos lineales
+## como el ingenuo, ingenuo estacional y el de deriva
+## el pronostico ingenuo esta basado en la ultima observacion que arroja 
+##la serie d etiempo. Es decir este pronostico asume que la observacion mas importante 
+## es la ultima.
+## naive(serie - h= num prnosticos)
+
+install.packages("forecast")   ##finanzas, es muy lineal. 
+require (forecast)
+naive(pibt, h=4)##h numer de pronosticos
+
+########################METODO PROMEDIO
+
+# Este metodo le da el mismo peso a todos los datos u onservaciones 
+#es decir, se asume con este metodo que todas las observaciones 
+##tienen la misma importancia por lo que el pronostico
+## es un promedio de todas las observaciones 
+### funcion para r meanf serie,h=numero de pronosticos)
+
+meanf(decocts, h=4)
+plot (meanf(decocts, h=4))
+###imputacion-> promedio, ingenuo tomar la ultma observacion 
+
+####################################INGENUO ESTACIONAL 
+### eSte metodo se utiliza en series de tiempo con alta estacionalidad 
+## este pronostico consiste en darle 
+##el mayor peso o la mayor ponderacion al dato del mismo periodo
+## en el año anterior por ejemplo trimestre 2 del 2005 es igual al 
+## trimestre 2 del 2016
+## la funcion para utilizarlo es 
+snaive(decocts, h=4)
