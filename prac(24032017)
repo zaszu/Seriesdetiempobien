@@ -1,0 +1,33 @@
+
+desoc<-read.csv("C:\\Users\\Sala-D\\Downloads\\tarea2.csv")
+decocts<- ts(desoc)
+
+acf(decocts)
+install.packages("forecast")   ##finanzas, es muy lineal. 
+require (forecast)
+
+rwf(decocts, h= 4,drift=TRUE)
+
+
+desocmod1 <- meanf(decocts, h=4)## e metodo del promedio
+desocmod2 <- naive(decocts, h=4)
+desocmod3 <- snaive(decocts, h=4)
+desocmod4 <- rwf(decocts, h=4, drift=T)
+
+
+plot(desocmod1,
+     main="pronostico de desocupacion trimestral")
+lines(desocmod2$mean,col=5)## residuals
+lines(desocmod3$mean,col=6)
+lines(desocmod4$mean,col=7)
+legend("topright", lty=1,col=c(5,6,7,8),
+       legend=c("media","ingenuu","ingenuo estacional","deriva"))
+
+names(desocmod2)
+desocmod1$
+"""4 pronosticos y casos reales 
+## graficamente 
+###2005 2010, 2010 datos reales 
+### restar el valor del primer trimestre del 2011valor real menos el valor del 
+##valor del primr trimestre del 2011 del ingenuo
+##funcion
