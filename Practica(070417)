@@ -1,0 +1,38 @@
+require(fpp)
+
+de<-read.csv("C:\\Users\\Sala-D19\\Desktop\\tarea2.csv")
+des<- ts(de,frequency = 4,start=2005)                              
+
+mod1<- ses(des, alpha=0.1,initial="simple", h=8)
+mod2<- ses(des, alpha=0.3,initial="simple", h=8)             
+mod3<- ses(des, alpha=0.9,initial="simple", h=8)             
+mod4<- ses(des, alpha=0.95,initial="simple", h=8)             
+
+plot(mod1, ylab="pib", xlab="años", main="pib", type="o")
+plot(mod2, ylab="pib", xlab="años", main="pib", type="o")
+plot(mod3, ylab="pib", xlab="años", main="pib", type="o")
+plot(mod4, ylab="pib", xlab="años", main="pib", type="o")
+
+aa<- des- mod1$fitted
+aa
+mean(abs(aa))##MAE
+sqrt(mean(aa^2))##RMSE
+
+bb<- des- mod2$fitted
+bb
+mean(abs(bb))##MAE
+sqrt(mean(bb^2))##RMSE
+
+cc<- des- mod3$fitted
+cc
+mean(abs(cc))##MAE
+sqrt(mean(cc^2))##RMSE
+
+dd<- des- mod4$fitted
+dd
+mean(abs(dd))##MAE
+sqrt(mean(dd^2))##RMSE
+
+
+### Modelo tres mas ajustados a sus valores observados
+##el modelo es el mas sercanos a 0 
