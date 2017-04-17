@@ -54,6 +54,5 @@ dr4<-sqrt(mean(dd^2))##RMSE
 x<-data.frame(am1,bm2,cm3,dm4) 
 y<-data.frame(ar1,br2,cr3,dr4)
 
-help("if")
 ### Modelo mas ajustados a sus valores observados
 ##el modelo es el mas sercanos a 0 
