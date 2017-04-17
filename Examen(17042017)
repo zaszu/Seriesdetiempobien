@@ -35,18 +35,20 @@ bb<- des- mod2$fitted
 bb
 bm2<-mean(abs(bb))##MAE
 
-br2sqrt(mean(bb^2))##RMSE
+br2<-sqrt(mean(bb^2))##RMSE
 
 cc<- des- mod3$fitted
 cc
 cm3<-mean(abs(cc))##MAE
-cr3sqrt(mean(cc^2))##RMSE
+cr3<-sqrt(mean(cc^2))##RMSE
 
 dd<- des- mod4$fitted
 dd
 dm4<-mean(abs(dd))##MAE
 dr4<-sqrt(mean(dd^2))##RMSE
 
+x<-data.frame(am1,bm2,cm3,dm4) 
+y<-data.frame(ar1,br2,cr3,dr4)
 
 ### Modelo mas ajustados a sus valores observados
 ##el modelo es el mas sercanos a 0 
