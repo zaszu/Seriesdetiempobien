@@ -23,8 +23,12 @@ mod2<- ses(des, alpha=0.4,initial="simple", h=1)
 mod3<- ses(des, alpha=0.6,initial="simple", h=1)             
 mod4<- ses(des, alpha=0.8,initial="simple", h=1)             
 
-mod41 <-c(mod1,mod2,mod3,mod4)
-plot(mod41, ylab ="Acciciones", xlab="periodo", main="Acciones televisa", type="o")
+plot(des,ylab="precio",xlab="fecha",main="PRECIOS TELEVISA",col="black",type="l")
+lines(fitted(mod1),col="brown",type="s")
+lines(fitted(mod2),col="red",type="p")
+lines(fitted(mod3),col="green",type="b")
+lines(fitted(mod4),col="blue",type="o")
+###en mi opinion el azul es el  de mejor ajuste
 
 aa<- des- mod1$fitted
 aa
@@ -50,5 +54,6 @@ dr4<-sqrt(mean(dd^2))##RMSE
 x<-data.frame(am1,bm2,cm3,dm4) 
 y<-data.frame(ar1,br2,cr3,dr4)
 
+help("if")
 ### Modelo mas ajustados a sus valores observados
 ##el modelo es el mas sercanos a 0 
