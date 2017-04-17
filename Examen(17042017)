@@ -1,0 +1,52 @@
+##Ejercicio bajar acciones de Televisa 
+###Precio de cierre 2016
+#####################Ajustar 4 modelos de suavizado exponencial simple 
+###########(alpha=.2,.4,.6,.8)
+##Graficar en una sola grafica
+##Con la grafica decidir cual de los 4 es el mejor ajuste que tiene
+###una vez que hayan decidido graficamente el mejor ajuste 
+##aplicar la evaluacion de los ajustes y utilizar las medidas MAE y RMSE
+###extrallendolas de tal forma que creen un vector que compare estas medidas
+# y este vector indique que alpha es la mejor 
+##identificar tendencia estacionariedad y ciclos 
+##enla serie d etiempo e interpretar estoscomponentes
+
+install.packages("questionr")
+install.packages("fpp")
+require(fpp)
+require(questionr)
+de<-read.csv("C:\\Users\\Sala-D17\\Desktop\\tele.csv")
+des<- ts(de,frequency =251 ,start=2016)                              
+
+mod1<- ses(des, alpha=0.2,initial="simple", h=1)
+mod2<- ses(des, alpha=0.4,initial="simple", h=1)             
+mod3<- ses(des, alpha=0.6,initial="simple", h=1)             
+mod4<- ses(des, alpha=0.8,initial="simple", h=1)             
+
+mod41 <-c(mod1,mod2,mod3,mod4)
+plot(mod41, ylab ="Acciciones", xlab="periodo", main="Acciones televisa", type="o")
+
+aa<- des- mod1$fitted
+aa
+mean(abs(aa))##MAE
+sqrt(mean(aa^2))##RMSE
+
+bb<- des- mod2$fitted
+bb
+mean(abs(bb))##MAE
+
+sqrt(mean(bb^2))##RMSE
+
+cc<- des- mod3$fitted
+cc
+mean(abs(cc))##MAE
+sqrt(mean(cc^2))##RMSE
+
+dd<- des- mod4$fitted
+dd
+mean(abs(dd))##MAE
+sqrt(mean(dd^2))##RMSE
+
+
+### Modelo mas ajustados a sus valores observados
+##el modelo es el mas sercanos a 0 
