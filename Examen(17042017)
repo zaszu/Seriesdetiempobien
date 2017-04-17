@@ -28,24 +28,24 @@ plot(mod41, ylab ="Acciciones", xlab="periodo", main="Acciones televisa", type="
 
 aa<- des- mod1$fitted
 aa
-mean(abs(aa))##MAE
-sqrt(mean(aa^2))##RMSE
+am1<-mean(abs(aa))##MAE
+ar1<-sqrt(mean(aa^2))##RMSE
 
 bb<- des- mod2$fitted
 bb
-mean(abs(bb))##MAE
+bm2<-mean(abs(bb))##MAE
 
-sqrt(mean(bb^2))##RMSE
+br2sqrt(mean(bb^2))##RMSE
 
 cc<- des- mod3$fitted
 cc
-mean(abs(cc))##MAE
-sqrt(mean(cc^2))##RMSE
+cm3<-mean(abs(cc))##MAE
+cr3sqrt(mean(cc^2))##RMSE
 
 dd<- des- mod4$fitted
 dd
-mean(abs(dd))##MAE
-sqrt(mean(dd^2))##RMSE
+dm4<-mean(abs(dd))##MAE
+dr4<-sqrt(mean(dd^2))##RMSE
 
 
 ### Modelo mas ajustados a sus valores observados
