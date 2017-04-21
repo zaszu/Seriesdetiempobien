@@ -1,0 +1,36 @@
+
+######## Tendencia lineal de holt 
+install.packages("foreign")
+require(foreign)
+require(fpp)
+base<-read.csv("C:\\Users\\Sala-D17\\Downloads\\ta2.csv")
+base2<-read.csv("C:\\Users\\Sala-D17\\Downloads\\Pibanual.csv")
+
+basets<- ts(base[1:16,], frequency=16, start = 2000)
+bas2ets<- ts(base2, frequency=1, start = 1)
+base1ts<- ts(base[16:19], frequency=3, start = 2000)
+bas22ets<- ts(base2, frequency=1, start = 16)  
+
+mod1<-holt(basets,initial="simple",h=3)
+
+mod2<-holt(basets, initial="simple", exponential=TRUE,h=3)
+
+Mod3<- holt(basets,damped=TRUE,h=3)
+
+Mod4<- holt(basets,exponential=T,damped=T,h=3)
+
+
+mod11<-holt(bas2ets,alpha=.08, beta=.02, initial="simple")
+
+mod22<-holt(bas2ets,alpha=.08, beta=.02, initial="simple", exponential=TRUE,h=2)
+
+Mod33<- holt(bas2ets,damped=TRUE)
+
+Mod44<- holt(bas2ets,exponential=T,damped=T)
+
+plot(base,ylab="precio",xlab="fecha",main="PRECIOS",col="black",type="l")
+lines((mod1),col="brown",type="s")
+lines((mod2),col="red",type="a")
+lines((Mod3),col="green",type="b")
+lines((Mod4),col="blue",type="o")
+lines(fitted(base1ts),col="black",type="l")
