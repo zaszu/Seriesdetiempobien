@@ -1,0 +1,34 @@
+Holt winters estacional 
+Plantea este método con la finalidad de captar la estacionalidad en una serie de tiempo
+Este método plantea 3 ecuaciones de suaviza miento, nivel, tendencia y estacionalidad 
+Modelo: tendencia multiplicativa amortiguado 
+Calculo en  R
+Mod2<-hw(deso,seasonal=”additive”)
+Mod2<-hw(deso,seasonal=”multiplicative”)
+Ejercicio Generar  una serie de tiempo estacional y aplicar el pronostico de los dos métodos y además apliquen el pronóstico de tendencia exponencial y graficar para comparar 
+
+########Ejercicio 
+serie<-sample(23:28,100,replace = TRUE)
+seriets<- ts(serie)
+install.packages("fpp")
+require(fpp)
+
+mod1<-hw(seriets,alpha=.8,beta = .2,initial = "simple", seasonal="additive",h=30)
+mod1
+
+mod2<-hw(seriets,alpha=.8,beta = .2,initial = "simple",seasonal="multiplicative",h=30)
+mod2
+
+expo<-holt(seriets,alpha=.8,beta = .2,initial = "simple",exponential = T,h=30)
+expo
+names(mod2)
+names(expo)
+
+x11()
+plot(mod1,main = "precio simulado ")
+lines(mod1$mean,col="pink",type="o")
+lines(mod2$mean,col="red",type="o")
+lines(expo$mean,col="green",type="o")
+
+
+#plot(expo,main = "precio simulado ")
