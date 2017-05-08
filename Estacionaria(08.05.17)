@@ -1,0 +1,14 @@
+########Ejercicio 
+##### GENEREN UNA SERIE DE TIEMPO CON 252 CASOS 
+######### DEL 2016 AL 2017 DIARIA CON UN RANGO DE 300 A 900
+serie<-sample(300:900,252)
+seriets<- ts(serie,frequency=252, start=2016)
+acf(seriets)
+plot(seriets)
+ICA<-read.csv("C:\\Users\\Sala-D\\Desktop\\ICA.csv")
+ICATS<-ts(ICA,frequency=252, start=2016)
+acf(ICATS)
+plot(ICATS)
+####Investigar como hacer la diferenciacion d euna serie de tiempo como la de ICA
+##investigar una diferenciacion en R
+###que hagamos la diferenciacion en 10 datos
