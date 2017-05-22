@@ -1,0 +1,169 @@
+
+#-------------------------------------------ARIMA-------------------------------
+
+
+install.packages("fpp")
+require(fpp)
+#----------------------------B. de datos---------------------
+
+cemex<-read.csv("C:\\Users\\Sala-D\\Downloads\\CEMEXCPO.csv")
+bimbo<-read.csv("C:\\Users\\Sala-D\\Downloads\\BIMBOA.csv")
+bimbo
+#--------------------------ST-----------------------
+
+cemexts<-ts(cemex,frequency = 252, start=2016 )
+###[0,5] en caso de abrir la st en la tabla [fila, columna]
+bimts<-ts(bimbo, frequency =252, start=2016 )
+
+#-------------------------Graficas---------------------------
+### 1)Revisar si nuestra serie es estacionaria 
+### Se aplica la prueba de raiz unitaria a traves de la funcion 
+####adf.test y esperamos que el p-value sea menos a .05
+plot(bimts)
+adf.test(bimts)
+dbimts<- diff(bimts)
+### debido a que la serie de tiempo original no es estacionaria
+adf.test(dbimts)
+### que nuesra serie serie en suprimera diferenciavion se convierte en estacionaria
+###### DIFERENCIACION 1
+
+
+##-------------------------------------------Valor q y valor p-----------------------
+
+#---------- promedios moviles
+#correlograma 
+## lineas que sobrepasan las fronteras
+## numero de orden de los promedios moviles 
+###NUMERO DE Q
+### que no sean homogeneas las lineas 
+
+acf(dbimts)
+#NUMERO DE Q=2
+
+#------------Funcion de correlacion parcial -----------------------
+#-----------Autorregresivos 
+####pacf()
+###Numero de orden de modelos autorregresivos
+
+pacf(dbimts)
+##NUMERO DE P=1
+
+####*******Por lo que s epropone un modelo ARIMA(1,1,2)*********
+modbim<- Arima(bimts, order=c(1,1,2))
+modbim
+####Menor valos de la AICc MEJOR MODELO******
+###Sigma arl autorregresivo
+##ma1 y ma2=Valor de promedios moviles
+
+#------------------Proponemos un modelo -------------
+
+modbim2<- Arima(bimts, order=c(2,1,2))
+modbim2
+
+####menor valor de AICc sera el mejor modelo 
+
+#-------------------------------------RESUIDALES---------------------------------
+###RUIDO BLANCO
+modres<- residuals (modbim)
+Box.test(modres, lag=12, type="Ljung-Box")
+
+##P-value muestra que los rsiduales tienen ruido blanco ya que es mayor a .05
+
+#------------------Aplicammos un modelo 
+mod1<- forecast(modbim, h=12)
+x11()
+plot(forecast(modbim, h=12),include=18)### Ultimos datos 
+mod1
+summary(mod1)
+
+#-------AUTOARIMA-----**************************************************************
+
+auto.arima(bimts)
+##despues aplicamos el ruido blanco y despues el pronostico
+
+modautoarima<- Arima(bimts, order=c(1,1,2))
+modautoarima
+
+####menor valor de AICc sera el mejor modelo 
+
+#-------------------------------------RESUIDALES---------------------------------
+###RUIDO BLANCO
+modres2<- residuals (modautoarima)
+Box.test(modres2, lag=12, type="Ljung-Box")
+
+##P-value muestra que los rsiduales tienen ruido blanco ya que es mayor a .05
+
+#------------------Aplicammos un modelo 
+mod2<- forecast(modautoarima, h=12)
+x11()
+plot(forecast(modautoarima, h=12),include=18)### Ultimos datos 
+mod1
+summary(mod1)
+
+#---------------------------------****************CEMEX*******************-----------------------------********
+
+cemexts<-ts(cemex,frequency = 252, start=2016 )
+#--------------------------ST-----------------------
+
+cemexts<-ts(cemex,frequency = 252, start=2016 )
+###[0,5] en caso de abrir la st en la tabla [fila, columna]
+
+#-------------------------Graficas---------------------------
+### 1)Revisar si nuestra serie es estacionaria 
+### Se aplica la prueba de raiz unitaria a traves de la funcion 
+####adf.test y esperamos que el p-value sea menos a .05
+plot(cemexts)
+adf.test(cemexts)
+dcemexts<- diff(cemexts)
+### debido a que la serie de tiempo original no es estacionaria
+adf.test(dcemexts)
+
+### que nuesra serie serie en suprimera diferenciavion se convierte en estacionaria
+###### DIFERENCIACION 1
+
+
+##-------------------------------------------Valor q y valor p-----------------------
+
+#---------- promedios moviles
+#correlograma 
+## lineas que sobrepasan las fronteras
+## numero de orden de los promedios moviles 
+###NUMERO DE Q
+### que no sean homogeneas las lineas 
+
+acf(dcemexts)
+#NUMERO DE Q=1
+
+#------------Funcion de correlacion parcial -----------------------
+#-----------Autorregresivos 
+####pacf()
+###Numero de orden de modelos autorregresivos
+
+pacf(dcemexts)
+##NUMERO DE P=0
+
+####*******Por lo que s epropone un modelo ARIMA(1,1,2)*********
+modcemex<- Arima(cemexts, order=c(0,1,1))
+modcemex
+####Menor valos de la AICc MEJOR MODELO******
+###Sigma arl autorregresivo
+##ma1 y ma2=Valor de promedios moviles
+
+#------------------Proponemos un modelo -------------
+
+modcemex2<- Arima(cemexts, order=c(0,1,2))
+modcemex2
+
+####menor valor de AICc sera el mejor modelo 
+
+#-------------------------------------RESUIDALES---------------------------------
+###RUIDO BLANCO
+modres2<- residuals (modcemex)
+Box.test(modres, lag=12, type="Ljung-Box")
+
+##P-value muestra que los rsiduales tienen ruido blanco ya que es mayor a .05
+
+#------------------Aplicammos un modelo 
+mod22<- forecast(modcemex2, h=12)## con la de aarima
+x11()
+plot(forecast(modcemex2, h=12),include=18)### Ultimos datos 
