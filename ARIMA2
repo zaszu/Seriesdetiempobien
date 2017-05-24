@@ -1,0 +1,90 @@
+
+#-------------------------------------------ARIMA-------------------------------
+
+
+install.packages("foreign")
+require(foreign)
+install.packages("fpp")
+require(fpp)
+#----------------------------B. de datos---------------------
+
+AMX<-read.csv("C:\\Users\\Sala-D\\Downloads\\AMX.csv")
+
+#--------------------------ST-----------------------
+
+amxts<-ts(AMX [,5],frequency = 252, start=2016 )
+                                                               
+
+#--------------------------MODELO ARIMA ORDEN 1-----------------------
+
+arima<- Arima(amxts, order = c(1,0,0))
+arima
+
+#-------------------------EC---------------------------
+
+### yt= c+ fil(Yt-1)+fil(Yt-2)+...+Fip(Yt-p)+et
+##En este caso el modelo AR(1) se plantea de la siguiente manera 
+##Yt=13.3425(Intercepto, constante)+.9864(Yt-1)+et... en este caso fil=.9864
+#Si tuvieramos un modelo Autorregresivo de orden 2 se expresa como modelo
+#arima de la siguiente manera 
+#--------------------------MODELO ARIMA ORDEN 2-----------------------
+arima2<- Arima(amxts, order = c(2,0,0))
+arima2
+
+
+### En este caso el mpdelo AR(2) se plantea de la siguiente manera 
+#yt= 13.2634 + 1.0601(Yt -1)-.0755+et... en este caso fil=1.0601 
+#fi2=-0.0755
+
+
+#-----------------------------
+
+#Ahora bien si tenemos de promedios moviles MA (q) se puede expresar 
+##yt=c+teta1(et-1)+teta2(et-2)...+tetap(et-p)+ et
+#a traves de un modelo ARIMA se expresa de esta forma como lo podemo ver 
+
+pm<- Arima(amxts, order = c(0,0,1))## En este caso es un MA(1)
+pm
+
+
+#-------------------------MODELO ARIMA (CON DIFERNECIACION)-----------------------
+
+
+y´t= c+fi1(y´t-1)+...+ fip(y´t-p)+teta1(et-1)+...+tetap(et-q)+ et
+
+##PARA UN MODEI ARIMA CON p=2, d=3, q=2 expresa; 
+
+dif<-arima(amxts, order = c(2,3,2))
+## yt=c+fil(Yt-1)+fi2(Yt-2)+...+fip(Yt-p)+et
+dif
+
+#con este modelo expresamos 
+y´´´t=.0716(y´´´t-1)-.1527(y´´´t-2)-1.9987(et-1)+,9998(et-2)+et
+
+
+#-------------------------Ejercicio----------------------
+
+install.packages("foreign")
+require(foreign)
+install.packages("fpp")
+require(fpp)
+
+###Vitro-> Arima (3,4,0)
+#----------------------------B. de datos---------------------
+
+vitro<-read.csv("C:\\Users\\Sala-D\\Downloads\\VITROA.MX.csv")
+
+#--------------------------ST-----------------------
+
+vitrots<-ts(vitro [,5],frequency = 252, start=2016 )
+
+
+#--------------------------MODELO ARIMA ORDEN 1-----------------------
+
+arima1<- Arima(vitrots, order = c(3,4,0))
+arima1
+#-------------------------EC---------------------------
+
+### yt= c+ fil(Yt-1)+fil(Yt-2)+...+Fip(Yt-p)+et
+##En este caso el modelo AR(1) se plantea de la siguiente manera 
+##Yt=-.5457(Intercepto, constante)-1.1961(Yt-1)+et... en este caso fil=-1.5008
